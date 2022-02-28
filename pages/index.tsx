@@ -14,7 +14,7 @@ import { GameContext } from '@/store/Game.context';
 import HowToPlay from '@/components/HowToPlay/HowToPlay.component';
 
 export function Home(props: IHome.IHomeProps) {
-  const [value, setValue] = useContext(GameContext);
+  const [value, setValue]: any = useContext(GameContext);
   const { board, inputs, isStarted } = value;
 
   const [isSuccess, setIsSuccess] = useState(false);
