@@ -8,8 +8,6 @@
 }
 
 .inputCover {
-  transition: all 2s;
-
   position: absolute;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
@@ -20,6 +18,9 @@
   width: 100%;
   height: 100%;
   background-color: #283b75;
+
+  transition: all 700ms;
+  transition-timing-function: ease-in;
 }
 
 .coverHidden {

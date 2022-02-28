@@ -66,7 +66,8 @@ export function Home(props: IHome.IHomeProps) {
         zIndex={3}
         position={"relative"}
         mt={12}
-        backgroundColor={"#273c75"}>
+        backgroundColor={"#273c75"}
+        height={480}>
         {!isStarted ?
           <HowToPlay />
           :
