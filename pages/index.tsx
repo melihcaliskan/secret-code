@@ -88,7 +88,12 @@ export function Home(props: IHome.IHomeProps) {
 
 
 export async function getServerSideProps() {
-  const data = await fetch("api/secret").then(res => res.json());
+  const localUrl = "http://localhost:3000/"
+  const prodUrl = "https://secret-code-delta.vercel.app/";
+
+  const isProd = process.env.NODE_ENV === "production";
+  const API_URL = isProd ? prodUrl : localUrl;
+  const data = await fetch(API_URL + "api/secret/").then(res => res.json());
   const { day, board } = data;
 
   return {
