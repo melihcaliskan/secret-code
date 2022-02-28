@@ -88,7 +88,7 @@ export function Home(props: IHome.IHomeProps) {
 
 
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/secret").then(res => res.json());
+  const data = await fetch("api/secret").then(res => res.json());
   const { day, board } = data;
 
   return {
