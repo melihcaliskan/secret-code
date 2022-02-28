@@ -89,7 +89,7 @@ export function Home(props: IHome.IHomeProps) {
 
 export async function getServerSideProps() {
   const localUrl = "http://localhost:3000/"
-  const prodUrl = "https://secret-code-delta.vercel.app/";
+  const prodUrl = "https://secret-code-omega.vercel.app/";
 
   const isProd = process.env.NODE_ENV === "production";
   const API_URL = isProd ? prodUrl : localUrl;
