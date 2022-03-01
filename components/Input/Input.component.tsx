@@ -30,7 +30,7 @@ export function Input(props) {
           {enumToArray(PinColor).map((color, idx) =>
             <Pin
               key={idx}
-              color={color}
+              color={PinColor[color]}
               onClick={() => onClick(color)} />
           )}
         </HStack>

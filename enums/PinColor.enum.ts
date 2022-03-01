@@ -6,5 +6,5 @@ export enum PinColor {
   PURPLE = "purple",
   BLUE = "blue",
   WHITE = "white",
-  BLACK = "black"
+  BLACK = "#292929"
 }

@@ -3,6 +3,7 @@ import Pin from "components/Pin/Pin.component";
 import RowStatus from "components/RowStatus/RowStatus.component";
 import { BOARD_SIZE } from "@/utility/constants";
 import { GameContext } from "@/store/Game.context";
+import { PinColor } from "@/enums/PinColor.enum";
 import styles from "@/styles/Pin.module.scss";
 
 export function Row(props) {
@@ -22,7 +23,7 @@ export function Row(props) {
             board={board}
             key={columnIndex}
             index={columnIndex}
-            color={inputs[columnIndex]}
+            color={PinColor[inputs[columnIndex]]}
           />
         )}
       </div>
