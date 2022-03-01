@@ -1,62 +1,41 @@
-/* eslint-disable react/no-unescaped-entities */
-import { useContext, useState } from 'react';
-import { getTomorrow } from '@/utility/helpers';
-import {
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  useDisclosure,
-  Heading,
-} from '@chakra-ui/react';
-import Countdown from 'react-countdown';
-import ShareButtons from '../ShareButtons/ShareButtons.component';
-import { BOARD_ROWS } from '@/utility/constants';
-import { GameContext, INITIAL_STATE } from '@/store/Game.context';
+import { useContext } from 'react';
+import { Button, Heading, Flex, Box } from '@chakra-ui/react'
+import { GameContext, INITIAL_STATE } from 'store/Game.context';
+import Counter from 'components/Counter/Counter.component';
 
-export function FailModal() {
+export function SuccessModal() {
   const [value, setValue]: any = useContext(GameContext);
-  const [tomorrow, setTomorrow] = useState(getTomorrow());
 
-  function handleClose() {
+  function restartGame() {
     setValue(INITIAL_STATE);
   }
 
   return (
-    <>
-      <Modal isOpen={value.isOver} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Heading as='h4' size='md'>
-              Game Over 😣
-            </Heading>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      mx={12}>
+      <Heading color="gray.100">
+        Game Over 😣
+      </Heading>
 
-            <Text>
-              🧩 You couldn't find the code in {BOARD_ROWS} tries
-            </Text>
+      <Box
+        mt={16}
+        mb={4}>
+        <Counter
+          isSuccess={true} />
+      </Box>
 
-            <Heading as='h5' size='sm'>
-              Next Secret Code
-            </Heading>
-            <Countdown
-              date={tomorrow} />
-
-            <ShareButtons />
-
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+      <Button
+        mt={36}
+        isFullWidth
+        height={14}
+        onClick={restartGame}>
+        Restart Game
+      </Button>
+    </Box>
   )
 }
 
-export default FailModal;
+export default SuccessModal;

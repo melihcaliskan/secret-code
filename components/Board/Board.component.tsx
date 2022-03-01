@@ -4,10 +4,9 @@ import { BOARD_ROWS, BOARD_SIZE } from "@/utility/constants";
 import { useContext } from "react";
 import { GameContext } from "@/store/Game.context";
 
-export function Board(props) {
-  const [value, setValue] = useContext(GameContext);
-  const { board } = value;
-  const { activeBoardIndex } = props;
+export function Board() {
+  const [value, _] = useContext(GameContext);
+  const { activeBoardIndex, board } = value;
 
   if (!board || !board?.length) {
     return null;

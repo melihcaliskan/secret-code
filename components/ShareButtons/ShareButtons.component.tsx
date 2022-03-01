@@ -1,5 +1,9 @@
 export function ShareButtons() {
   return (
+    null
+  )
+  
+  return (
     <>
       <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a>
       <div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small">

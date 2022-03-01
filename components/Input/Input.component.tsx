@@ -8,15 +8,16 @@ import { GameContext } from '@/store/Game.context';
 
 export function Input(props) {
   const [value, setValue]: any = useContext(GameContext);
-  const { isStarted } = value;
+  const { isStarted, isOver, isSuccess } = value;
   const { onClick } = props;
+  const hideCover = isStarted && (isStarted && !isSuccess) && (isStarted && !isOver);
 
   return (
     <VStack
       className={styles.input}>
 
       <Box
-        className={`${styles.inputCover} ${isStarted ? styles.coverHidden : ""}`} />
+        className={`${styles.inputCover} ${hideCover ? styles.coverHidden : ""}`} />
 
       <Box>
         <Text

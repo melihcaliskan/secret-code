@@ -1,59 +1,51 @@
-import { useContext, useState } from 'react';
-import { getTomorrow } from '@/utility/helpers';
-import {
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  useDisclosure,
-  Heading,
-} from '@chakra-ui/react';
-import Countdown from 'react-countdown';
-import ShareButtons from '../ShareButtons/ShareButtons.component';
-import { GameContext, INITIAL_STATE } from '@/store/Game.context';
+import { useContext } from 'react';
+import { Button, Heading, Box } from '@chakra-ui/react'
+import { GameContext, INITIAL_STATE } from 'store/Game.context';
+import Counter from 'components/Counter/Counter.component';
+import ShareButtons from 'components/ShareButtons/ShareButtons.component';
+import NextGame from 'components/NextGame/NextGame.component';
 
-export function SuccessModal(props) {
+export function SuccessModal() {
   const [value, setValue]: any = useContext(GameContext);
-  const [tomorrow, setTomorrow] = useState(getTomorrow());
 
-  function handleClose() {
+  function restartGame() {
     setValue(INITIAL_STATE);
   }
 
   return (
-    <>
-      <Modal isOpen={value.isSuccess} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Heading as='h4' size='md'>
-              Amazing!
-            </Heading>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      mx={12}>
+      <Heading color="gray.100">
+        Amazing!
+      </Heading>
 
-            <Text>
-              🕟 You solved this question in twenty minutes
-            </Text>
+      <Box
+        mt={16}
+        mb={4}>
+        <Counter
+          isSuccess={true} />
+      </Box>
 
-            <Heading as='h5' size='sm'>
-              Next Secret Code
-            </Heading>
-            <Countdown
-              date={tomorrow} />
+      <NextGame />
 
-            <ShareButtons />
-
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+      <Box
+        w="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        mt={36}>
+        <ShareButtons />
+        <Button
+          isFullWidth
+          height={14}
+          onClick={restartGame}>
+          Restart Game
+        </Button>
+      </Box>
+    </Box>
   )
 }
 
