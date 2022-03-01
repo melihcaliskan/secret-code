@@ -29,7 +29,7 @@ export function FailModal() {
         mt={16}
         mb={4}>
         <Counter
-          isSuccess={true} />
+          isSuccess={false} />
       </Box>
 
       <NextGame />
