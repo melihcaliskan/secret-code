@@ -23,7 +23,6 @@ export function RowStatus(props: any) {
     if (isSuccess) {
       setValue({
         isSuccess: true,
-        inputs: []
       })
     }
   }

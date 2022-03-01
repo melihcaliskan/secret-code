@@ -1,15 +1,17 @@
+import { useContext } from "react";
 import { Button, useToast } from "@chakra-ui/react";
+import { GameContext } from "@/store/Game.context";
 
 export function Clipboard() {
-  const toast = useToast()
+  const [value, setValue]: any = useContext(GameContext);
+  const toast = useToast();
+  const { inputs } = value;
 
   function onCopy() {
-    navigator.clipboard.writeText("test").then(function () {
-      /* clipboard successfully set */
-
+    navigator.clipboard.writeText(JSON.stringify(inputs)).then(function () {
       toast({
-        title: 'Account created.',
-        description: "We've created your account for you.",
+        title: "Success!",
+        description: "Your answers have been copied to clipboard.",
         status: 'success',
         duration: 9000,
         isClosable: true,
@@ -17,13 +19,17 @@ export function Clipboard() {
 
     }).catch(e => {
       // Fallback
-      window.prompt("Copy to clipboard: Ctrl+C, Enter", "123");
+      window.prompt("Copy to clipboard:", "123");
     });
   }
 
   return (
-    <Button onClick={onCopy}>
-      Show Toast
+    <Button
+      w="100%"
+      colorScheme='twitter'
+      height={14}
+      onClick={onCopy}>
+      Share
     </Button>
   )
 }

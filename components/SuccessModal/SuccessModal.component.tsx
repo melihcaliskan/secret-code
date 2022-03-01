@@ -36,7 +36,7 @@ export function SuccessModal() {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        mt={36}>
+        mt={24}>
         <ShareButtons />
         <Button
           isFullWidth

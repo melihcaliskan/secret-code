@@ -1,9 +1,14 @@
 import { useContext } from 'react';
-import { Button, Heading, Flex, Box } from '@chakra-ui/react'
+import { Button, Heading, Box } from '@chakra-ui/react'
 import { GameContext, INITIAL_STATE } from 'store/Game.context';
-import Counter from 'components/Counter/Counter.component';
+import ShareButtons from '../ShareButtons/ShareButtons.component';
+import Counter from '../Counter/Counter.component';
+import NextGame from '../NextGame/NextGame.component';
 
-export function SuccessModal() {
+// Refactor yapılacak.
+// Bu componente gerek yok.
+
+export function FailModal() {
   const [value, setValue]: any = useContext(GameContext);
 
   function restartGame() {
@@ -27,15 +32,24 @@ export function SuccessModal() {
           isSuccess={true} />
       </Box>
 
-      <Button
-        mt={36}
-        isFullWidth
-        height={14}
-        onClick={restartGame}>
-        Restart Game
-      </Button>
+      <NextGame />
+
+      <Box
+        w="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        mt={24}>
+        <ShareButtons />
+        <Button
+          isFullWidth
+          height={14}
+          onClick={restartGame}>
+          Restart Game
+        </Button>
+      </Box>
     </Box>
   )
 }
 
-export default SuccessModal;
+export default FailModal;

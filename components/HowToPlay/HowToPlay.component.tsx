@@ -70,6 +70,7 @@ export function HowToPlay() {
         px={6}>
         <Button
           isFullWidth
+          height={14}
           onClick={startGame}>
           Start Game
         </Button>

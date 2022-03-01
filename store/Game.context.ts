@@ -7,7 +7,7 @@ export const INITIAL_STATE = {
   isFlipped: false,
   inputs: [],
   activeBoardIndex: 0,
-  startDate: 0
+  startTime: 0
 }
 
 export const GameContext = createContext(INITIAL_STATE);

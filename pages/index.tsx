@@ -52,7 +52,6 @@ export function Home(props: IHome.IHomeProps) {
         setTimeout(() => {
           setValue({
             isOver: true,
-            inputs: []
           });
         }, 1200);
       }
@@ -74,7 +73,7 @@ export function Home(props: IHome.IHomeProps) {
 
     if (isOver) {
       return (
-        <p>over</p>
+        <FailModal />
       )
     }
 
@@ -111,7 +110,6 @@ export function Home(props: IHome.IHomeProps) {
         {JSON.stringify(value)}
       </p> */}
 
-      
       {/* <Button
         isFullWidth
         onClick={() => storageService.set({ test: new Date().getTime() })}>
