@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Button, Container } from '@chakra-ui/react'
 
 import Board from '@/components/Board/Board.component';
 import Header from '@/components/Header/Header.component'
@@ -11,15 +12,12 @@ import styles from "styles/Board.module.scss";
 import { BOARD_ROWS, BOARD_SIZE } from '@/utility/constants';
 import { IHome } from '@/interfaces/IHome.interface';
 import { GameContext } from '@/store/Game.context';
+import { storageService } from '@/utility/storage';
+import ShareButtons from '@/components/ShareButtons/ShareButtons.component';
 
 export function Home(props: IHome.IHomeProps) {
   const [value, setValue]: any = useContext(GameContext);
-  const { board, inputs, isStarted } = value;
-
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isOver, setIsOver] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [activeBoardIndex, setActiveBoardIndex] = useState(0);
+  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver } = value;
 
   useEffect(() => {
     // Set day and board to context.
@@ -28,6 +26,13 @@ export function Home(props: IHome.IHomeProps) {
 
 
   function onInput(color: string) {
+    // First input, record date.
+    if (inputs.length === 0) {
+      setValue({
+        startTime: new Date().getTime()
+      })
+    }
+
     setValue({
       inputs: [
         ...value.inputs,
@@ -35,9 +40,9 @@ export function Home(props: IHome.IHomeProps) {
       ]
     });
 
-    if (inputs.length > 0 && inputs.length % BOARD_SIZE === 0) {
-
+    if (inputs.length > 0 && inputs.length % BOARD_SIZE === BOARD_SIZE - 1) {
       const nextBoard = activeBoardIndex + 1;
+
       if (BOARD_ROWS === nextBoard) {
         setValue({
           isFlipped: true
@@ -46,14 +51,43 @@ export function Home(props: IHome.IHomeProps) {
         // Wait for flip animation.
         setTimeout(() => {
           setValue({
-            isOver: true
+            isOver: true,
+            inputs: []
           });
         }, 1200);
       }
 
       if (BOARD_ROWS > nextBoard) {
-        setActiveBoardIndex(activeBoardIndex + 1);
+        setValue({
+          activeBoardIndex: activeBoardIndex + 1
+        });
       }
+    }
+  }
+
+  function renderContent() {
+    if (!isStarted) {
+      return (
+        <HowToPlay />
+      )
+    }
+
+    if (isOver) {
+      return (
+        <p>over</p>
+      )
+    }
+
+    if (isSuccess) {
+      return (
+        <SuccessModal />
+      )
+    }
+
+    if (isStarted) {
+      return (
+        <Board />
+      )
     }
   }
 
@@ -68,20 +102,27 @@ export function Home(props: IHome.IHomeProps) {
         backgroundColor={"#273c75"}
         height={480}
         className={styles.boardContainer}>
-        {!isStarted ?
-          <HowToPlay />
-          :
-          <Board
-            activeBoardIndex={activeBoardIndex}
-            setActiveBoard={setActiveBoardIndex} />
-        }
+        {renderContent()}
       </Box>
 
       <Input onClick={onInput} />
 
-      <SuccessModal />
-      <FailModal />
+      {/* <p style={{ color: "white" }}>
+        {JSON.stringify(value)}
+      </p> */}
 
+      
+      {/* <Button
+        isFullWidth
+        onClick={() => storageService.set({ test: new Date().getTime() })}>
+        Set
+      </Button>
+
+      <Button
+        isFullWidth
+        onClick={async () => console.log(await storageService.get())}>
+        Get
+      </Button> */}
     </Container>
   )
 }

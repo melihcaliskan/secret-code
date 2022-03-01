@@ -5,7 +5,9 @@ export const INITIAL_STATE = {
   isSuccess: false,
   isOver: false,
   isFlipped: false,
-  inputs: []
+  inputs: [],
+  activeBoardIndex: 0,
+  startDate: 0
 }
 
 export const GameContext = createContext(INITIAL_STATE);

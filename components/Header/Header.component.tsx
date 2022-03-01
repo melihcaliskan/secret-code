@@ -13,7 +13,6 @@ import { GameContext } from "@/store/Game.context";
 export function Header(props: IHeader.IHeaderProps) {
   const [value, _] = useContext(GameContext);
   const { board, day, isFlipped } = value;
-  // const isFlipped = true;
 
   const titleClasses = `${styles.container} ${!isFlipped ? styles.show : styles.hidden}`;
   const boardClasses = `${styles.container} ${isFlipped ? styles.show : styles.hidden}`;

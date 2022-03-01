@@ -19,9 +19,11 @@ export function RowStatus(props: any) {
 
   function checkIsSuccess(colors: Array<string>) {
     const isSuccess = colors.every(color => color === PinColor.YELLOW);
+    
     if (isSuccess) {
       setValue({
-        isSuccess: true
+        isSuccess: true,
+        inputs: []
       })
     }
   }
