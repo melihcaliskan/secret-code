@@ -17,6 +17,6 @@ const difference = TODAY.diff(INITIAL_DATE, "days");
 export default function handler(req: any, res: any) {
   res.status(200).json({
     day: difference + 1,
-    board: boards[difference]
+    board: boards[difference + 1]
   })
 }
