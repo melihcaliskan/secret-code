@@ -1,5 +1,10 @@
 import { boards } from "@/utility/boards";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Europe/Istanbul");
 
 const INITIAL_DATE = dayjs("2022-03-01");
 const TODAY = dayjs();
