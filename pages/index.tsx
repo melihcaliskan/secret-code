@@ -1,17 +1,16 @@
-import Header from '@/components/Header/Header.component'
-import Input from '@/components/Input/Input.component'
 import { useContext, useEffect, useState } from 'react';
-import { Box, Button, Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 
-import { BOARD_ROWS, BOARD_SIZE } from '@/utility/constants';
-import { getRandomColor } from '@/utility/helpers';
-import { IHome } from '@/interfaces/IHome.interface';
 import Board from '@/components/Board/Board.component';
-import styles from "styles/Board.module.scss";
-import SuccessModal from '@/components/SuccessModal/SuccessModal.component';
-import FailModal from '@/components/FailModal/FailModal.component';
-import { GameContext } from '@/store/Game.context';
+import Header from '@/components/Header/Header.component'
 import HowToPlay from '@/components/HowToPlay/HowToPlay.component';
+import FailModal from '@/components/FailModal/FailModal.component';
+import Input from '@/components/Input/Input.component'
+import SuccessModal from '@/components/SuccessModal/SuccessModal.component';
+import styles from "styles/Board.module.scss";
+import { BOARD_ROWS, BOARD_SIZE } from '@/utility/constants';
+import { IHome } from '@/interfaces/IHome.interface';
+import { GameContext } from '@/store/Game.context';
 
 export function Home(props: IHome.IHomeProps) {
   const [value, setValue]: any = useContext(GameContext);
@@ -65,9 +64,10 @@ export function Home(props: IHome.IHomeProps) {
       <Box
         zIndex={3}
         position={"relative"}
-        mt={12}
+        mt={4}
         backgroundColor={"#273c75"}
-        height={480}>
+        height={480}
+        className={styles.boardContainer}>
         {!isStarted ?
           <HowToPlay />
           :
