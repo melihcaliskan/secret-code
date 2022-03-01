@@ -25,7 +25,7 @@ export function Input(props) {
           PICK ONE COLOR
         </Text>
 
-        <HStack spacing="24px">
+        <HStack className={styles.inputStack}>
           {enumToArray(PinColor).map((color, idx) =>
             <Pin
               key={idx}

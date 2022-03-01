@@ -3,6 +3,12 @@
   border-radius: 16px;
 }
 
+.boardContainer {
+  @media (max-width: 768px) {
+    height: auto;
+  }
+}
+
 .gameContainer {
   padding: 0;
   background-color: #273c75;

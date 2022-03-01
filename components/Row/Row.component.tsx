@@ -3,6 +3,7 @@ import Pin from "components/Pin/Pin.component";
 import RowStatus from "components/RowStatus/RowStatus.component";
 import { BOARD_SIZE } from "@/utility/constants";
 import { GameContext } from "@/store/Game.context";
+import styles from "@/styles/Pin.module.scss";
 
 export function Row(props) {
   const [value, _] = useContext(GameContext);
@@ -11,15 +12,7 @@ export function Row(props) {
 
   return (
     <>
-      <div style={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "space-around",
-        marginBottom: 10,
-        paddingTop: 6,
-        paddingBottom: 6,
-        borderRadius: 6,
-      }}>
+      <div className={styles.row}>
         <RowStatus
           board={board}
           inputs={inputs} />

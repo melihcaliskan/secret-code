@@ -31,15 +31,13 @@ export function HowToPlay() {
     });
   }
 
-  // TODO: jpg.
-  // TODO: transparent.
   return (
     <Flex
       flexDir={"column"}
       justifyContent={"center"}
       alignItems={"center"}>
 
-      <Heading style={{ fontSize: 24, color: "rgba(255,255,255,0.8)" }}>
+      <Heading mt={4} style={{ fontSize: 24, color: "rgba(255,255,255,0.8)" }}>
         How To Play
       </Heading>
 
@@ -51,7 +49,7 @@ export function HowToPlay() {
         objectFit="contain"
       />
 
-      <List spacing={3} mt={6} mb={12}>
+      <List spacing={3} mt={6} mb={12} px={6}>
         {steps.map((step, idx) => {
           const { text, color, icon } = step;
           return (
