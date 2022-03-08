@@ -12,13 +12,18 @@ dayjs.tz.setDefault(TZ);
 const INITIAL_DATE = dayjs("2022-03-01").tz(TZ);
 const TODAY = dayjs().tz(TZ);
 
-const dateDif = TODAY.diff(INITIAL_DATE, "days");
-const difference = 1;
-console.log("Dates:", INITIAL_DATE, TODAY, dateDif);
+const dateDiff = TODAY.diff(INITIAL_DATE, "days");
+console.log("Dates:", INITIAL_DATE, TODAY, dateDiff);
 
 export default function handler(req: any, res: any) {
   res.status(200).json({
-    day: difference + 1,
-    board: boards[difference]
+    day: dateDiff + 1,
+    board: boards[dateDiff],
+    debug: {
+      INITIAL_DATE,
+      TODAY,
+      dateDiff,
+      now: dayjs().tz(TZ)
+    }
   })
 }

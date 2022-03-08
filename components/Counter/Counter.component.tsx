@@ -27,7 +27,8 @@ export function Counter(props) {
       </Text>
       <Text
         fontSize="19px"
-        color="gray.100">
+        color="gray.100"
+        textAlign="center">
         {text}
       </Text>
     </Stack>

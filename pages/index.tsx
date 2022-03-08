@@ -18,7 +18,8 @@ import ShareButtons from '@/components/ShareButtons/ShareButtons.component';
 export function Home(props: IHome.IHomeProps) {
   const [value, setValue]: any = useContext(GameContext);
   const { activeBoardIndex, inputs, isStarted, isSuccess, isOver } = value;
-
+  console.log("Props:", props);
+  
   useEffect(() => {
     // Set day and board to context.
     setValue(props);
@@ -134,11 +135,12 @@ export async function getServerSideProps() {
   const API_URL = isProd ? prodUrl : localUrl;
   const data = await fetch(API_URL + "api/secret/").then(res => res.json());
   const { day, board } = data;
-
+  console.log("Res:", data);
   return {
     props: {
       day,
-      board
+      board,
+      data
     },
   }
 }
