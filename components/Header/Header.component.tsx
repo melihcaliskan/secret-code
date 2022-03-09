@@ -30,7 +30,7 @@ export function Header(props: IHeader.IHeaderProps) {
         <Title day={day} />
       </div>
       <div className={boardClasses}>
-        <Box w="64px" />
+        <Box w="72px" />
         {board?.map((color, idx) =>
           <Pin
             key={idx}

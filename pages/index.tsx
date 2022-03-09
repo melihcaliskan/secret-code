@@ -17,8 +17,7 @@ import useStorage from '@/utility/useStorage';
 export function Home(props: IHome.IHomeProps) {
   const { getItem, setItem } = useStorage();
   const [value, setValue]: any = useContext(GameContext);
-  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver } = value;
-  console.log("Props:", props);
+  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin } = value;
 
   useEffect(() => {
     // Set day and board to context.
@@ -35,20 +34,50 @@ export function Home(props: IHome.IHomeProps) {
     console.log("Storage UUID:", storageUUID);
   }
 
-  function onInput(color: string) {
+  function handleFirstInput() {
     // First input, record date.
-    if (inputs.length === 0) {
-      setValue({
-        startTime: new Date().getTime()
-      })
-    }
+    setValue({
+      startTime: new Date().getTime()
+    })
+  }
 
+  function setInput(color: string) {
+    // Add new color to inputs.
     setValue({
       inputs: [
         ...value.inputs,
         color
       ]
     });
+  }
+
+  function updateInput(color: string) {
+    // Update existing column.
+    let tempInputs = [...inputs];
+    let selected = tempInputs[BOARD_SIZE * selectedPin.row + selectedPin.column];
+
+    if (!selected) {
+      tempInputs[BOARD_SIZE * selectedPin.row + selectedPin.column] = color;
+      setValue({
+        inputs: tempInputs,
+        selectedPin: undefined
+      });
+    }
+  }
+
+
+  function onInput(color: string) {
+    if (inputs.length === 0) {
+      handleFirstInput();
+    }
+
+    if (selectedPin) {
+      updateInput(color);
+      return;
+    } else {
+      setInput(color);
+    }
+
 
     if (inputs.length > 0 && inputs.length % BOARD_SIZE === BOARD_SIZE - 1) {
       const nextBoard = activeBoardIndex + 1;
@@ -132,7 +161,7 @@ export function Home(props: IHome.IHomeProps) {
         Get
       </Button> */}
 
-      {isDev() && <p>{JSON.stringify(value.board)}</p>}
+      {isDev() && <p>{JSON.stringify(value)}</p>}
     </Container>
   )
 }
@@ -145,12 +174,10 @@ export async function getServerSideProps() {
   const data = await fetch(API_URL + "api/secret/").then(res => res.json());
   const { day, board } = data;
 
-  console.log("Res:", data);
   return {
     props: {
       day,
       board,
-      data
     },
   }
 }

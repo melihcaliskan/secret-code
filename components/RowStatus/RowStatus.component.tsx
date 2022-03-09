@@ -9,17 +9,18 @@ import { BOARD_SIZE } from '@/utility/constants';
 import { getRowColors } from '@/utility/helpers';
 
 export function RowStatus(props: any) {
+  const { slicedInputs, rowIndex } = props;
   const [value, setValue]: any = useContext(GameContext);
   const [colors, setColors] = useState(getColors());
-  const { inputs } = value;
+  const [localInputs, setLocalInputs] = useState(slicedInputs);
 
   function getColors() {
-    return getRowColors(value.board, props.inputs);
+    return getRowColors(value.board, slicedInputs);
   }
 
   function checkIsSuccess(colors: Array<string>) {
     const isSuccess = colors.every(color => color === PinColor.YELLOW);
-    
+
     if (isSuccess) {
       setValue({
         isSuccess: true,
@@ -28,17 +29,20 @@ export function RowStatus(props: any) {
   }
 
   useEffect(() => {
-    const colors = getColors();
-    setColors(colors);
-    checkIsSuccess(colors);
-  }, [inputs]);
+    if (JSON.stringify(localInputs) != JSON.stringify(slicedInputs)) {
+      console.log("Değişti", rowIndex, slicedInputs, localInputs)
+      const colors = getColors();
+      setColors(colors);
+      checkIsSuccess(colors);
+    }
+  }, [slicedInputs]);
 
   return (
-    <Box w="64px" display={"flex"}>
+    <Box w="72px" display={"flex"}>
       {[...Array(BOARD_SIZE)].map((e, idx) =>
         <Pin
           key={idx}
-          color={props.inputs.length === BOARD_SIZE ? colors[idx] : undefined}
+          color={slicedInputs.length === BOARD_SIZE ? colors[idx] : undefined}
           size={"small"}
           style={{ marginTop: idx % 2 === 0 ? 0 : "12px" }} />
       )}

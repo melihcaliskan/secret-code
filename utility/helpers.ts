@@ -42,7 +42,7 @@ export function shuffleArray(array: Array<any>) {
 
 export function getRowColors(board: Array<any>, inputs: Array<any>) {
   const colors = board.map((i, idx) => i === inputs[idx] ? PinColor.YELLOW : PinColor.RED);
-  //return shuffleArray(colors);
+  return shuffleArray(colors);
   return colors;
 }
 
