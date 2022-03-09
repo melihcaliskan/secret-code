@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Box, Button, Flex, Heading, List, ListIcon, ListItem } from "@chakra-ui/react";
 import { CheckCircleIcon, TimeIcon, NotAllowedIcon } from '@chakra-ui/icons'
 import { GameContext } from "@/store/Game.context";
+import analytics from "utility/analytics";
+import useStorage from "@/utility/useStorage";
 
 const steps = [
   {
@@ -23,12 +25,22 @@ const steps = [
 ];
 
 export function HowToPlay() {
+  const { getItem } = useStorage();
   const [value, setValue] = useContext(GameContext);
+
 
   function startGame() {
     setValue({
       isStarted: true
     });
+
+    const uuid = getItem("uuid", "local");
+    analytics.event({
+      action: "Start Game",
+      params: {
+        uuid
+      }
+    })
   }
 
   return (

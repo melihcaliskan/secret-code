@@ -5,7 +5,8 @@ import Counter from 'components/Counter/Counter.component';
 import ShareButtons from 'components/ShareButtons/ShareButtons.component';
 import NextGame from 'components/NextGame/NextGame.component';
 
-export function SuccessModal() {
+export function GameEnd(props) {
+  const { isSuccess } = props;
   const [value, setValue]: any = useContext(GameContext);
 
   function restartGame() {
@@ -19,14 +20,14 @@ export function SuccessModal() {
       alignItems="center"
       mx={12}>
       <Heading color="gray.100">
-        Amazing!
+        {isSuccess ? "Amazing! 🎉" : "Game Over 😣"}
       </Heading>
 
       <Box
         mt={16}
         mb={4}>
         <Counter
-          isSuccess={true} />
+          isSuccess={isSuccess} />
       </Box>
 
       <NextGame />
@@ -36,7 +37,7 @@ export function SuccessModal() {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        mt={24}>
+        mt={22}>
         <ShareButtons />
         <Button
           isFullWidth
@@ -49,4 +50,4 @@ export function SuccessModal() {
   )
 }
 
-export default SuccessModal;
+export default GameEnd;

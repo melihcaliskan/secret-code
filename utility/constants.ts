@@ -1,3 +1,6 @@
+export const localUrl = "http://localhost:3000/"
+export const prodUrl = "https://secret-code-omega.vercel.app/";
+
 export const BOARD_SIZE = 4;
 export const BOARD_ROWS = 8;
 

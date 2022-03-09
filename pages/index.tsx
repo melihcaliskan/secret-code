@@ -1,29 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
-import { Box, Button, Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 
 import Board from '@/components/Board/Board.component';
 import Header from '@/components/Header/Header.component'
 import HowToPlay from '@/components/HowToPlay/HowToPlay.component';
-import FailModal from '@/components/FailModal/FailModal.component';
 import Input from '@/components/Input/Input.component'
-import SuccessModal from '@/components/SuccessModal/SuccessModal.component';
-import styles from "styles/Board.module.scss";
-import { BOARD_ROWS, BOARD_SIZE } from '@/utility/constants';
+import { GameEnd } from '@/components/GameEnd/GameEnd.component';
+import { BOARD_ROWS, BOARD_SIZE, localUrl, prodUrl } from '@/utility/constants';
 import { IHome } from '@/interfaces/IHome.interface';
 import { GameContext } from '@/store/Game.context';
-import { storageService } from '@/utility/storage';
-import ShareButtons from '@/components/ShareButtons/ShareButtons.component';
+import { getUUID, isDev } from '@/utility/helpers';
+import styles from "styles/Board.module.scss";
+import useStorage from '@/utility/useStorage';
 
 export function Home(props: IHome.IHomeProps) {
+  const { getItem, setItem } = useStorage();
   const [value, setValue]: any = useContext(GameContext);
   const { activeBoardIndex, inputs, isStarted, isSuccess, isOver } = value;
   console.log("Props:", props);
-  
+
   useEffect(() => {
     // Set day and board to context.
     setValue(props);
+    handleSession();
   }, []);
+
+  function handleSession() {
+    const storageUUID = getItem("uuid", "local");
+    if (!storageUUID) {
+      setItem("uuid", getUUID(), "local");
+    }
+
+    console.log("Storage UUID:", storageUUID);
+  }
 
 
   function onInput(color: string) {
@@ -54,7 +64,7 @@ export function Home(props: IHome.IHomeProps) {
           setValue({
             isOver: true,
           });
-        }, 1200);
+        }, 1500);
       }
 
       if (BOARD_ROWS > nextBoard) {
@@ -74,13 +84,13 @@ export function Home(props: IHome.IHomeProps) {
 
     if (isOver) {
       return (
-        <FailModal />
+        <GameEnd isSuccess={false} />
       )
     }
 
     if (isSuccess) {
       return (
-        <SuccessModal />
+        <GameEnd isSuccess={true} />
       )
     }
 
@@ -122,19 +132,20 @@ export function Home(props: IHome.IHomeProps) {
         onClick={async () => console.log(await storageService.get())}>
         Get
       </Button> */}
+
+      {isDev() && <p>{JSON.stringify(value.board)}</p>}
     </Container>
   )
 }
 
 
 export async function getServerSideProps() {
-  const localUrl = "http://localhost:3000/"
-  const prodUrl = "https://secret-code-omega.vercel.app/";
-
   const isProd = process.env.NODE_ENV === "production";
   const API_URL = isProd ? prodUrl : localUrl;
+
   const data = await fetch(API_URL + "api/secret/").then(res => res.json());
   const { day, board } = data;
+
   console.log("Res:", data);
   return {
     props: {
