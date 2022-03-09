@@ -1,4 +1,3 @@
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { GameProvider } from '@/providers/Game.Provider';
@@ -13,6 +12,21 @@ function SecretCode({ Component, pageProps }: AppProps) {
   }
 
   const theme = extendTheme({
+    styles: {
+      global: {
+        'html,body': {
+          padding: 0,
+          margin: 0,
+          backgroundColor: "#192a56",
+          backgroundImage: "radial-gradient(#33436c 0.5px, #192a56 0.5px)",
+          backgroundSize: "20px 20px",
+          backgroundPosition: "0 0, 10px 10px"
+        },
+        '*': {
+          boxSizing: "border-box"
+        }
+      }
+    },
     fonts: {
       heading: 'Nunito, sans-serif',
       body: 'Nunito, sans-serif',

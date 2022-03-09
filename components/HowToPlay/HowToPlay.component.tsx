@@ -5,6 +5,7 @@ import { CheckCircleIcon, TimeIcon, NotAllowedIcon } from '@chakra-ui/icons'
 import { GameContext } from "@/store/Game.context";
 import analytics from "utility/analytics";
 import useStorage from "@/utility/useStorage";
+import { Event } from "@/enums/Event.enum";
 
 const steps = [
   {
@@ -26,7 +27,7 @@ const steps = [
 
 export function HowToPlay() {
   const { getItem } = useStorage();
-  const [value, setValue] = useContext(GameContext);
+  const [_, setValue] = useContext(GameContext);
 
 
   function startGame() {
@@ -36,7 +37,7 @@ export function HowToPlay() {
 
     const uuid = getItem("uuid", "local");
     analytics.event({
-      action: "Start Game",
+      action: Event.START_GAME,
       params: {
         uuid
       }

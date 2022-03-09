@@ -35,7 +35,6 @@ export function Home(props: IHome.IHomeProps) {
     console.log("Storage UUID:", storageUUID);
   }
 
-
   function onInput(color: string) {
     // First input, record date.
     if (inputs.length === 0) {
