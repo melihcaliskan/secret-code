@@ -19,19 +19,24 @@ export function Clipboard() {
   }
 
   function onCopy() {
-    navigator.clipboard.writeText(getShareData(day, inputs).text).then(function () {
-      toast({
-        title: "Success!",
-        description: "Your answers have been copied to clipboard.",
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      });
+    const data = getShareData(day, inputs).text;
 
-    }).catch(e => {
-      // Fallback
-      window.prompt("Copy to clipboard:", "123");
-    });
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(data).then(function () {
+        toast({
+          title: "Success!",
+          description: "Your answers have been copied to clipboard.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      }).catch(e => {
+        // Fallback
+        window.prompt("Copy to clipboard:", data);
+      });
+    } else {
+      window.prompt("Copy to clipboard:", data);
+    }
   }
 
   return (

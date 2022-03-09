@@ -67,7 +67,7 @@ export function getShareData(day: number, inputs: Array<any>) {
   return {
     title: `Secret Code #${day}`,
     text: `Secret Code #${day} \n${convertInputsToEmoji(inputs)}`,
-    url: window.location.host,
+    url: window.location.origin,
   }
 }
 
