@@ -138,7 +138,6 @@ export function Home(props: IHome.IHomeProps) {
         position={"relative"}
         mt={4}
         backgroundColor={"#273c75"}
-        height={480}
         className={styles.boardContainer}>
         {renderContent()}
       </Box>

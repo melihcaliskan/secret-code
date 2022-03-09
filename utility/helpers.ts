@@ -41,6 +41,10 @@ export function shuffleArray(array: Array<any>) {
 }
 
 export function getRowColors(board: Array<any>, inputs: Array<any>) {
+  // const sortedBoard = board.sort((a, b) => a.localeCompare(b));
+  // const sortedInputs = inputs.sort((a, b) => a.localeCompare(b));
+  // console.log("Board:", board, sortedBoard, "inputs", inputs, sortedInputs)
+
   const colors = board.map((i, idx) => i === inputs[idx] ? PinColor.YELLOW : PinColor.RED);
   return shuffleArray(colors);
   return colors;

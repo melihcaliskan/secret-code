@@ -11,7 +11,7 @@ import { getRowColors } from '@/utility/helpers';
 export function RowStatus(props: any) {
   const { slicedInputs, rowIndex } = props;
   const [value, setValue]: any = useContext(GameContext);
-  const [colors, setColors] = useState(getColors());
+  const [colors, setColors] = useState([]);
   const [localInputs, setLocalInputs] = useState(slicedInputs);
 
   function getColors() {
@@ -29,9 +29,9 @@ export function RowStatus(props: any) {
   }
 
   useEffect(() => {
-    if (JSON.stringify(localInputs) != JSON.stringify(slicedInputs)) {
-      console.log("Değişti", rowIndex, slicedInputs, localInputs)
+    if (slicedInputs.length === BOARD_SIZE && !colors.length) {
       const colors = getColors();
+      console.log("Colors:", colors)
       setColors(colors);
       checkIsSuccess(colors);
     }

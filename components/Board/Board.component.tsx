@@ -20,7 +20,7 @@ export function Board() {
         const start = i * BOARD_SIZE;
         const end = (i + 1) * BOARD_SIZE;
         const slicedInputs = value.inputs.slice(start, end);
-        console.log("slicedInputs", i, "idx", start, end, slicedInputs);
+        // console.log("slicedInputs", i, "idx", start, end, slicedInputs);
         return (
           <Row
             active={activeBoardIndex === i}
