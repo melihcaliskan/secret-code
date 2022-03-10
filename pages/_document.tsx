@@ -1,6 +1,25 @@
+// @ts-nocheck
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
+  useEffect(() => {
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: process.env.NEXT_PUBLIC_ONESIGNAL_ID,
+        notifyButton: {
+          enable: true,
+        },
+
+        allowLocalhostAsSecureOrigin: true,
+      });
+    });
+
+    return () => {
+      window.OneSignal = undefined;
+    };
+  }, []);
+
   return (
     <Html>
       <Head>
@@ -30,6 +49,7 @@ export default function Document() {
           }}
         />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3535688390656362" crossOrigin="anonymous"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
       </Head>
       <body>
         <Main />
