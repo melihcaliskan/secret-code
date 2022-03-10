@@ -2,24 +2,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
-  useEffect(() => {
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
-      OneSignal.init({
-        appId: process.env.NEXT_PUBLIC_ONESIGNAL_ID,
-        notifyButton: {
-          enable: true,
-        },
-
-        allowLocalhostAsSecureOrigin: true,
-      });
-    });
-
-    return () => {
-      window.OneSignal = undefined;
-    };
-  }, []);
-
   return (
     <Html>
       <Head>
