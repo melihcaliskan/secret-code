@@ -4,7 +4,7 @@ import styles from "styles/Pin.module.scss"
 
 export function Pin(props: IPin.IPinProps) {
   const { color = "gray" } = props;
-  const size = props.size === "small" ? "16px" : "32px";
+  const size = props.size === "small" ? "16px" : "28px";
   
   return (
     <Box

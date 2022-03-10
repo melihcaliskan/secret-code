@@ -1,14 +1,12 @@
 import { useContext } from 'react';
 import { Button, Heading, Box } from '@chakra-ui/react'
 import { GameContext, INITIAL_STATE } from 'store/Game.context';
-import ShareButtons from '../ShareButtons/ShareButtons.component';
-import Counter from '../Counter/Counter.component';
-import NextGame from '../NextGame/NextGame.component';
+import Counter from 'components/Counter/Counter.component';
+import ShareButtons from 'components/ShareButtons/ShareButtons.component';
+import NextGame from 'components/NextGame/NextGame.component';
 
-// Refactor yapılacak.
-// Bu componente gerek yok.
-
-export function FailModal() {
+export function GameEnd(props) {
+  const { isSuccess } = props;
   const [value, setValue]: any = useContext(GameContext);
 
   function restartGame() {
@@ -22,14 +20,14 @@ export function FailModal() {
       alignItems="center"
       mx={12}>
       <Heading color="gray.100">
-        Game Over 😣
+        {isSuccess ? "Amazing! 🎉" : "Game Over 😣"}
       </Heading>
 
       <Box
         mt={16}
         mb={4}>
         <Counter
-          isSuccess={true} />
+          isSuccess={isSuccess} />
       </Box>
 
       <NextGame />
@@ -39,7 +37,7 @@ export function FailModal() {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        mt={24}>
+        mt={22}>
         <ShareButtons />
         <Button
           isFullWidth
@@ -52,4 +50,4 @@ export function FailModal() {
   )
 }
 
-export default FailModal;
+export default GameEnd;

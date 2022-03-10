@@ -1,15 +1,12 @@
 import { PinColor } from "@/enums/PinColor.enum";
+import { PinEmoji } from "@/enums/PinEmoji.enum";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { BOARD_SIZE } from "./constants";
 dayjs.extend(relativeTime)
 
 export function enumToArray(arg: object) {
   return arg && Object.keys(arg).map((key) => key);
-}
-
-export function getRandomColor() {
-  const arr = enumToArray(PinColor);
-  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 export function getTomorrow() {
@@ -44,6 +41,40 @@ export function shuffleArray(array: Array<any>) {
 }
 
 export function getRowColors(board: Array<any>, inputs: Array<any>) {
+  // const sortedBoard = board.sort((a, b) => a.localeCompare(b));
+  // const sortedInputs = inputs.sort((a, b) => a.localeCompare(b));
+  // console.log("Board:", board, sortedBoard, "inputs", inputs, sortedInputs)
+
   const colors = board.map((i, idx) => i === inputs[idx] ? PinColor.YELLOW : PinColor.RED);
+  //return shuffleArray(colors);
   return colors;
+}
+
+export function isDev(): boolean {
+  return process.env.NODE_ENV === "development";
+}
+
+export function convertInputsToEmoji(inputs: Array<any>) {
+  let text = "";
+  inputs.forEach((input, idx) => {
+    text += PinEmoji[input];
+    if (idx > 0 && (idx + 1) % BOARD_SIZE === 0) {
+      text += "\n";
+    }
+  })
+
+  console.log(text)
+  return text;
+}
+
+export function getShareData(day: number, inputs: Array<any>) {
+  return {
+    title: `Secret Code #${day}`,
+    text: `Secret Code #${day} \n${convertInputsToEmoji(inputs)}`,
+    url: window.location.origin,
+  }
+}
+
+export function getUUID() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }

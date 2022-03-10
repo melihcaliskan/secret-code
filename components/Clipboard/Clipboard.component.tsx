@@ -1,26 +1,42 @@
 import { useContext } from "react";
 import { Button, useToast } from "@chakra-ui/react";
 import { GameContext } from "@/store/Game.context";
+import { getShareData } from "@/utility/helpers";
 
 export function Clipboard() {
   const [value, setValue]: any = useContext(GameContext);
   const toast = useToast();
-  const { inputs } = value;
+  const { day, inputs } = value;
+
+  function onShare() {
+    const shareData = getShareData(day, inputs);
+
+    if ("canShare" in navigator) {
+      navigator.share(shareData);
+    } else {
+      onCopy();
+    }
+  }
 
   function onCopy() {
-    navigator.clipboard.writeText(JSON.stringify(inputs)).then(function () {
-      toast({
-        title: "Success!",
-        description: "Your answers have been copied to clipboard.",
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      });
+    const data = getShareData(day, inputs).text;
 
-    }).catch(e => {
-      // Fallback
-      window.prompt("Copy to clipboard:", "123");
-    });
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(data).then(function () {
+        toast({
+          title: "Success!",
+          description: "Your answers have been copied to clipboard.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      }).catch(e => {
+        // Fallback
+        window.prompt("Copy to clipboard:", data);
+      });
+    } else {
+      window.prompt("Copy to clipboard:", data);
+    }
   }
 
   return (
@@ -28,7 +44,7 @@ export function Clipboard() {
       w="100%"
       colorScheme='twitter'
       height={14}
-      onClick={onCopy}>
+      onClick={onShare}>
       Share
     </Button>
   )

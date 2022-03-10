@@ -8,22 +8,25 @@ export function Board() {
   const [value, _] = useContext(GameContext);
   const { activeBoardIndex, board } = value;
 
+  // Wait for board create.
   if (!board || !board?.length) {
     return null;
   }
 
   return (
     <div className={styles.board}>
+      {/* Create rows */}
       {[...Array(BOARD_ROWS)].map((e, i) => {
         const start = i * BOARD_SIZE;
         const end = (i + 1) * BOARD_SIZE;
         const slicedInputs = value.inputs.slice(start, end);
+        // console.log("slicedInputs", i, "idx", start, end, slicedInputs);
         return (
           <Row
             active={activeBoardIndex === i}
             key={i}
             rowIndex={i}
-            inputs={slicedInputs} />
+            slicedInputs={slicedInputs} />
         )
       })}
     </div>

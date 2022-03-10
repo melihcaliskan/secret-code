@@ -1,9 +1,10 @@
-export enum PinColor {
+export enum PinEmoji {
   RED = "🔴",
   YELLOW = "🟡",
   GREEN = "🟢",
   ORANGE = "🟠",
   PURPLE = "🟣",
   BLUE = "🔵",
-  WHITE = "⚪️"
+  WHITE = "⚪️",
+  BLACK = "⚫️"
 }
