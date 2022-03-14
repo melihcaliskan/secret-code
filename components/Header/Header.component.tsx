@@ -27,7 +27,7 @@ export function Header(props: IHeader.IHeaderProps) {
 
       <div
         className={titleClasses}>
-        <Title text={`Secret Code #${day}`} />
+        <Title day={day} />
       </div>
       <div className={boardClasses}>
         <Box w="72px" />

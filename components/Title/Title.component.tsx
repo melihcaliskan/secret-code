@@ -2,13 +2,13 @@ import { Heading } from '@chakra-ui/react'
 import styles from '../../styles/Header.module.scss';
 
 export function Title(props) {
-  const { text } = props;
+  const { day } = props;
   return (
     <Heading
       as='h2'
       size='2xl'
       className={styles.title}>
-      {text}
+      {`Secret Code #${day}`}
     </Heading>
   )
 }
