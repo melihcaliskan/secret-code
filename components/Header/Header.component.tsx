@@ -30,7 +30,12 @@ export function Header(props: IHeader.IHeaderProps) {
         <Title text={`Secret Code #${day}`} />
       </div>
       <div className={boardClasses}>
-        <Title text={`Game Over`} />
+        <Box w="72px" />
+        {board?.map((color, idx) =>
+          <Pin
+            key={idx}
+            color={color} />
+        )}
       </div>
     </Box>
   )

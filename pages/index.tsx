@@ -31,7 +31,7 @@ export function Home(props: IHome.IHomeProps) {
       setItem("uuid", getUUID(), "local");
     }
 
-    console.log("Storage UUID:", storageUUID);
+    // console.log("Storage UUID:", storageUUID);
   }
 
   function handleFirstInput() {

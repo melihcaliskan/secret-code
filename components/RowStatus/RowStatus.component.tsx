@@ -19,7 +19,7 @@ export function RowStatus(props: any) {
   }
 
   function checkIsSuccess(colors: Array<string>) {
-    const isSuccess = colors.every(color => color === PinColor.YELLOW);
+    const isSuccess = colors.every(color => color === PinColor.GREEN);
 
     if (isSuccess) {
       setValue({
@@ -31,7 +31,7 @@ export function RowStatus(props: any) {
   useEffect(() => {
     if (slicedInputs.length === BOARD_SIZE && !colors.length) {
       const colors = getColors();
-      console.log("Colors:", colors)
+      setValue({ rowColors: [...value.rowColors, ...colors] })
       setColors(colors);
       checkIsSuccess(colors);
     }

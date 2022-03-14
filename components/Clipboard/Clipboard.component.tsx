@@ -6,10 +6,10 @@ import { getShareData } from "@/utility/helpers";
 export function Clipboard() {
   const [value, setValue]: any = useContext(GameContext);
   const toast = useToast();
-  const { day, inputs } = value;
+  const { day, rowColors } = value;
 
   function onShare() {
-    const shareData = getShareData(day, inputs);
+    const shareData = getShareData(day, rowColors);
 
     if ("canShare" in navigator) {
       navigator.share(shareData);
@@ -19,7 +19,7 @@ export function Clipboard() {
   }
 
   function onCopy() {
-    const data = getShareData(day, inputs).text;
+    const data = getShareData(day, rowColors).text;
 
     if ("clipboard" in navigator) {
       navigator.clipboard.writeText(data).then(function () {

@@ -50,7 +50,7 @@ export function getRowColors(board: Array<any>, inputs: Array<any>) {
     if (i === inputs[idx]) {
       tempBoard[idx] = undefined;
       tempInputs[idx] = undefined;
-      return PinColor.YELLOW;
+      return PinColor.GREEN;
     }
   });
 
@@ -65,7 +65,7 @@ export function getRowColors(board: Array<any>, inputs: Array<any>) {
 
   // Fill matched.
   Array(matchedCount).fill().map(c => {
-    colors.push(PinColor.RED)
+    colors.push(PinColor.YELLOW)
   });
 
   // Fill remain.
@@ -84,7 +84,7 @@ export function isDev(): boolean {
 export function convertInputsToEmoji(inputs: Array<any>) {
   let text = "";
   inputs.forEach((input, idx) => {
-    text += PinEmoji[input];
+    text += input ? PinEmoji[input] : "🔘";
     if (idx > 0 && (idx + 1) % BOARD_SIZE === 0) {
       text += "\n";
     }
@@ -94,10 +94,10 @@ export function convertInputsToEmoji(inputs: Array<any>) {
   return text;
 }
 
-export function getShareData(day: number, inputs: Array<any>) {
+export function getShareData(day: number, rowColors: Array<any>) {
   return {
     title: `Secret Code #${day}`,
-    text: `Secret Code #${day} \n${convertInputsToEmoji(inputs)}`,
+    text: `Secret Code #${day} \n\n${convertInputsToEmoji(rowColors)}`,
     url: window.location.origin,
   }
 }
