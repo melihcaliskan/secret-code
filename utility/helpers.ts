@@ -97,7 +97,7 @@ export function convertInputsToEmoji(inputs: Array<any>) {
 export function getShareData(day: number, rowColors: Array<any>) {
   return {
     title: `Secret Code #${day}`,
-    text: `Secret Code #${day} \n\n${convertInputsToEmoji(rowColors)}`,
+    text: `Secret Code #${day} \n\n${convertInputsToEmoji(rowColors)}\n`,
     url: window.location.origin,
   }
 }
