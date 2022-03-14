@@ -41,7 +41,7 @@ export function HowToPlay() {
       params: {
         uuid
       }
-    })
+    });
   }
 
   return (

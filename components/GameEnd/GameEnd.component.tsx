@@ -1,13 +1,29 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Button, Heading, Box } from '@chakra-ui/react'
 import { GameContext, INITIAL_STATE } from 'store/Game.context';
 import Counter from 'components/Counter/Counter.component';
 import ShareButtons from 'components/ShareButtons/ShareButtons.component';
 import NextGame from 'components/NextGame/NextGame.component';
+import analytics from "utility/analytics";
+import { Event } from "@/enums/Event.enum";
+import useStorage from '@/utility/useStorage';
 
 export function GameEnd(props) {
   const { isSuccess } = props;
+  const { getItem } = useStorage();
   const [value, setValue]: any = useContext(GameContext);
+
+  useEffect(() => {
+    const uuid = getItem("uuid", "local");
+    analytics.event({
+      action: Event.START_GAME,
+      params: {
+        uuid,
+        ...value
+      }
+    });
+  }, []);
+
 
   function restartGame() {
     setValue(INITIAL_STATE);
