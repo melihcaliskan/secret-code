@@ -84,7 +84,7 @@ export function isDev(): boolean {
 export function convertInputsToEmoji(inputs: Array<any>) {
   let text = "";
   inputs.forEach((input, idx) => {
-    text += input ? PinEmoji[input] : "🔘";
+    text += input ? PinEmoji[input] : PinEmoji.WHITE;
     if (idx > 0 && (idx + 1) % BOARD_SIZE === 0) {
       text += "\n";
     }
