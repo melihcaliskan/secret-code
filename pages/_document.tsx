@@ -6,6 +6,10 @@ export default function Document() {
     <Html>
       <Head>
         <title>Secret Code</title>
+        <meta property="og:image" content="/og.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Secret Code" />
         <meta name="description" content="Secret Code" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
