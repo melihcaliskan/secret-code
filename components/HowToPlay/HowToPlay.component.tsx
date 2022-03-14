@@ -14,7 +14,7 @@ const steps = [
     icon: NotAllowedIcon
   },
   {
-    text: "Second row: 1st and 2nd Pins are matched. Colors of 3rd and 4th Pins are correct but their position is wrong.",
+    text: "Second row: 1st and 2nd Pins are matched. Colors of 3rd and 4th Pins are correct but they are placed in the wrong position.",
     color: "yellow.500",
     icon: TimeIcon
   },
