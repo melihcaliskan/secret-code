@@ -16,7 +16,7 @@ export function GameEnd(props) {
   useEffect(() => {
     const uuid = getItem("uuid", "local");
     analytics.event({
-      action: Event.START_GAME,
+      action: Event.GAME_OVER,
       params: {
         uuid,
         ...value
