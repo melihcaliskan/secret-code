@@ -110,15 +110,15 @@ export function Home(props: IHome.IHomeProps) {
       )
     }
 
-    if (isOver) {
-      return (
-        <GameEnd isSuccess={false} />
-      )
-    }
-
     if (isSuccess) {
       return (
         <GameEnd isSuccess={true} />
+      )
+    }
+
+    if (isOver) {
+      return (
+        <GameEnd isSuccess={false} />
       )
     }
 
