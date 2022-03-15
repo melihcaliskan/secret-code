@@ -10,10 +10,10 @@ export function Counter(props) {
   const { isSuccess } = props;
   const [value, _]: any = useContext(GameContext);
   const [playTime, setPlayTime] = useState(0);
-  const { inputs } = value;
+  const { activeBoardIndex } = value;
 
   const text = isSuccess ?
-    SUCCESS_MESSAGE(inputs.length, playTime) : FAIL_MESSAGE(inputs.length, playTime);
+    SUCCESS_MESSAGE(activeBoardIndex, playTime) : FAIL_MESSAGE(activeBoardIndex, playTime);
 
   useEffect(() => {
     setPlayTime(getPlayTime(value.startTime))

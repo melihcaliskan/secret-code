@@ -4,12 +4,11 @@ import styles from "styles/Pin.module.scss"
 
 export function Pin(props: IPin.IPinProps) {
   const { color = "gray" } = props;
-  const size = props.size === "small" ? "16px" : "28px";
-  
+
   return (
     <Box
-      w={size}
-      h={size}
+      w={props.size}
+      h={props.size}
       bg={color}
       borderRadius={32}
       className={styles.container}

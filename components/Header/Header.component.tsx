@@ -34,7 +34,8 @@ export function Header(props: IHeader.IHeaderProps) {
         {board?.map((color, idx) =>
           <Pin
             key={idx}
-            color={color} />
+            color={color}
+            size={"28px"} />
         )}
       </div>
     </Box>

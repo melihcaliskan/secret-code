@@ -6,6 +6,7 @@ import { GameContext } from "@/store/Game.context";
 import analytics from "utility/analytics";
 import useStorage from "@/utility/useStorage";
 import { Event } from "@/enums/Event.enum";
+import styles from "styles/Home.module.scss"
 
 const steps = [
   {
@@ -14,7 +15,7 @@ const steps = [
     icon: NotAllowedIcon
   },
   {
-    text: "Second row: 1st and 2nd Pins are matched. Colors of 3rd and 4th Pins are correct but they are placed in the wrong position.",
+    text: "Second row: 1st and 3rd Pins are correct, the color of the 4th pin is correct but it is in the wrong position.",
     color: "yellow.500",
     icon: TimeIcon
   },
@@ -54,13 +55,14 @@ export function HowToPlay() {
         How To Play
       </Heading>
 
-      <Image
-        src="/how-to.png"
-        alt="How to play"
-        width={480}
-        height={256}
-        objectFit="contain"
-      />
+      <Box className={styles.howToImg}>
+        <Image
+          src="/how-to.gif"
+          alt="How to play"
+          layout="fill"
+          objectFit="contain"
+        />
+      </Box>
 
       <List spacing={3} mt={6} mb={12} px={6}>
         {steps.map((step, idx) => {
@@ -88,7 +90,7 @@ export function HowToPlay() {
           Start Game
         </Button>
       </Box>
-    </Flex>
+    </Flex >
   )
 }
 

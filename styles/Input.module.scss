@@ -1,7 +1,7 @@
 .input {
   margin-top: 36px;
   position: relative;
-  padding: 24px 0 16px 0;
+  padding: 8px 0 16px 0;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 
@@ -38,9 +38,13 @@
   -moz-background-clip: text;
   background-clip: text;
 
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .inputStack {
-  gap: 4px;
+  gap: 14px;
+
+  @media (max-width: 768px) {
+    gap: 4px;
+  }
 }
