@@ -41,12 +41,39 @@ export function shuffleArray(array: Array<any>) {
 }
 
 export function getRowColors(board: Array<any>, inputs: Array<any>) {
-  // const sortedBoard = board.sort((a, b) => a.localeCompare(b));
-  // const sortedInputs = inputs.sort((a, b) => a.localeCompare(b));
-  // console.log("Board:", board, sortedBoard, "inputs", inputs, sortedInputs)
+  let tempBoard = [...board];
+  let tempInputs = [...inputs];
+  let matchedCount = 0;
 
-  const colors = board.map((i, idx) => i === inputs[idx] ? PinColor.YELLOW : PinColor.RED);
-  //return shuffleArray(colors);
+  // Find correct colors
+  let colors = tempBoard.map((i, idx) => {
+    if (i === inputs[idx]) {
+      tempBoard[idx] = undefined;
+      tempInputs[idx] = undefined;
+      return PinColor.GREEN;
+    }
+  });
+
+  tempBoard.map((i, idx) => {
+    if (inputs.some(input => input === i)) {
+      matchedCount++;
+    }
+  });
+
+  // Remove undefined.
+  colors = colors.filter(e => e);
+
+  // Fill matched.
+  Array(matchedCount).fill().map(c => {
+    colors.push(PinColor.YELLOW)
+  });
+
+  // Fill remain.
+  Array(4 - colors.length).fill().map(e => {
+    colors.push(undefined)
+  });
+
+  console.log("Return:", colors)
   return colors;
 }
 
@@ -57,7 +84,7 @@ export function isDev(): boolean {
 export function convertInputsToEmoji(inputs: Array<any>) {
   let text = "";
   inputs.forEach((input, idx) => {
-    text += PinEmoji[input];
+    text += input ? PinEmoji[input] : PinEmoji.WHITE;
     if (idx > 0 && (idx + 1) % BOARD_SIZE === 0) {
       text += "\n";
     }
@@ -67,10 +94,10 @@ export function convertInputsToEmoji(inputs: Array<any>) {
   return text;
 }
 
-export function getShareData(day: number, inputs: Array<any>) {
+export function getShareData(day: number, rowColors: Array<any>) {
   return {
     title: `Secret Code #${day}`,
-    text: `Secret Code #${day} \n${convertInputsToEmoji(inputs)}`,
+    text: `Secret Code #${day} \n\n${convertInputsToEmoji(rowColors)}\n`,
     url: window.location.origin,
   }
 }

@@ -6,6 +6,21 @@ export default function Document() {
     <Html>
       <Head>
         <title>Secret Code</title>
+        <meta property="og:image" content="/og.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Secret Code" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Secret Code" />
+        <meta property="og:description" content="Secret Code" />
+        <meta property="og:image" content="/og.jpg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="secret-code-omega.vercel.app" />
+        <meta property="twitter:url" content="https://secret-code-omega.vercel.app/" />
+        <meta name="twitter:title" content="Secret Code" />
+        <meta name="twitter:description" content="Secret Code" />
+        <meta name="twitter:image" content="/og.jpg" />
         <meta name="description" content="Secret Code" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

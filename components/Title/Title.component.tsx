@@ -7,9 +7,8 @@ export function Title(props) {
     <Heading
       as='h2'
       size='2xl'
-      color={"#"}
       className={styles.title}>
-      Secret Code #{day}
+      {`Secret Code #${day}`}
     </Heading>
   )
 }
