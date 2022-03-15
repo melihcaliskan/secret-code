@@ -143,23 +143,6 @@ export function Home(props: IHome.IHomeProps) {
       </Box>
 
       <Input onClick={onInput} />
-
-      {/* <p style={{ color: "white" }}>
-        {JSON.stringify(value)}
-      </p> */}
-
-      {/* <Button
-        isFullWidth
-        onClick={() => storageService.set({ test: new Date().getTime() })}>
-        Set
-      </Button>
-
-      <Button
-        isFullWidth
-        onClick={async () => console.log(await storageService.get())}>
-        Get
-      </Button> */}
-
       {isDev() && <p>{JSON.stringify(value)}</p>}
     </Container>
   )

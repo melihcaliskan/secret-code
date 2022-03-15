@@ -31,6 +31,7 @@ export function Input(props) {
             <Pin
               key={idx}
               color={PinColor[color]}
+              size={"28.5px"}
               onClick={() => onClick(color)} />
           )}
         </HStack>

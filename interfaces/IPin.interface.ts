@@ -4,6 +4,6 @@ export namespace IPin {
   export interface IPinProps {
     color?: PinColor | string;
     onClick?: (color: string) => void;
-    size?: string;
+    size?: string | number;
   }
 }

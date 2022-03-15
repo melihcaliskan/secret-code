@@ -43,7 +43,7 @@ export function RowStatus(props: any) {
         <Pin
           key={idx}
           color={slicedInputs.length === BOARD_SIZE ? colors[idx] : undefined}
-          size={"small"}
+          size={"16px"}
           style={{ marginTop: idx % 2 === 0 ? 0 : "12px" }} />
       )}
     </Box>

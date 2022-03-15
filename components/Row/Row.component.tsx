@@ -29,6 +29,7 @@ export function Row(props) {
         board={board}
         key={idx}
         index={idx}
+        size={"28px"}
         color={PinColor[slicedInputs[idx]]}
         onClick={() => handleClick(idx)}
       />
