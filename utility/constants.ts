@@ -2,7 +2,7 @@ export const localUrl = "http://localhost:3000/"
 export const prodUrl = "https://thesecretcodegame.com/";
 
 export const SITE_TITLE = "Secret Code";
-export const SITE_DESC = "Secret Code is a fun, interactive puzzle gamethat challenges you to crack codes! To play, simply pick a pin and match the pins to find the code.";
+export const SITE_DESC = "Secret Code is a fun, interactive puzzle game that challenges you to crack codes! To play, simply pick a pin and match the pins to find the code.";
 
 export const BOARD_SIZE = 4;
 export const BOARD_ROWS = 8;
