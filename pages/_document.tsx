@@ -1,27 +1,31 @@
+/* eslint-disable @next/next/no-title-in-document-head */
 // @ts-nocheck
+import { prodUrl, SITE_DESC, SITE_TITLE } from '@/utility/constants'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
     <Html>
       <Head>
-        <title>Secret Code</title>
+        <title>{SITE_TITLE}</title>
+        <meta name="description" content={SITE_DESC} />
+        <meta name="keywords" content="Secret Code, Secret Code Game, Secret Code Board" />
         <meta property="og:image" content="/og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Secret Code" />
+        <meta property="og:image:alt" content={SITE_DESC} />
+        <meta property="og:title" content={SITE_TITLE} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Secret Code" />
-        <meta property="og:description" content="Secret Code" />
+        <meta property="og:description" content={SITE_DESC} />
         <meta property="og:image" content="/og.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="secret-code-omega.vercel.app" />
-        <meta property="twitter:url" content="https://secret-code-omega.vercel.app/" />
-        <meta name="twitter:title" content="Secret Code" />
-        <meta name="twitter:description" content="Secret Code" />
+        <meta property="twitter:domain" content="thesecretcodegame.com" />
+        <meta property="twitter:url" content={prodUrl} />
+        <meta name="twitter:title" content={SITE_TITLE} />
+        <meta name="twitter:description" content={SITE_DESC} />
         <meta name="twitter:image" content="/og.jpg" />
-        <meta name="description" content="Secret Code" />
+        <meta name="description" content={SITE_TITLE} />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
