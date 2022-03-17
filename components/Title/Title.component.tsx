@@ -8,7 +8,7 @@ export function Title(props) {
       as='h2'
       size='2xl'
       className={styles.title}>
-      {`Secret Code #${day}`}
+      {`Secret Code #${day || ""}`}
     </Heading>
   )
 }
