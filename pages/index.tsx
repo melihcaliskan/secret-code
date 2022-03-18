@@ -13,9 +13,11 @@ import { GameContext } from '@/store/Game.context';
 import { getUUID, isDev } from '@/utility/helpers';
 import styles from "styles/Board.module.scss";
 import useStorage from '@/utility/useStorage';
+import { useTour } from '@reactour/tour';
 
 export function Home(props: IHome.IHomeProps) {
   const { getItem, setItem } = useStorage();
+  const { setIsOpen } = useTour()
   const [value, setValue]: any = useContext(GameContext);
   const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin } = value;
 
@@ -65,6 +67,14 @@ export function Home(props: IHome.IHomeProps) {
     }
   }
 
+  function showTour() {
+    const isTourCompleted = getItem("isTourCompleted");
+
+    if (!isTourCompleted) {
+      setIsOpen(true);
+      setItem("isTourCompleted", JSON.stringify(true));
+    }
+  }
 
   function onInput(color: string) {
     if (inputs.length === 0) {
@@ -82,11 +92,11 @@ export function Home(props: IHome.IHomeProps) {
     if (inputs.length > 0 && inputs.length % BOARD_SIZE === BOARD_SIZE - 1) {
       const nextBoard = activeBoardIndex + 1;
 
-      if (BOARD_ROWS === nextBoard) {
-        setValue({
-          isFlipped: true
-        });
+      if (nextBoard === 1) {
+        showTour();
+      }
 
+      if (BOARD_ROWS === nextBoard) {
         // Wait for flip animation.
         setTimeout(() => {
           setValue({
@@ -163,12 +173,5 @@ export async function getServerSideProps() {
     },
   }
 }
-
-
-{/* <Button onClick={() => setValue({ isFlipped: true })}>
-        Flip
-      </Button> */}
-
-{/* {JSON.stringify(value)} */ }
 
 export default Home;
