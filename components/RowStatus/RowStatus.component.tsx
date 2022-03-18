@@ -60,30 +60,31 @@ export function RowStatus(props: any) {
     }
   }, [slicedInputs]);
 
+  const active = value.activeBoardIndex === 0 || value.activeBoardIndex === rowIndex + 1;
   return (
     <Stack w="72px" direction="row" alignItems="center" spacing="3">
       {value.activeBoardIndex > rowIndex ?
         <>
           <Indicator
-            active={value.activeBoardIndex === rowIndex + 1}
+            active={active}
             count={colors.filter(c => c === PinColor.GREEN)?.length}
             color="#218c74"
             className="first-step" />
 
           <Indicator
-            active={value.activeBoardIndex === rowIndex + 1}
+            active={active}
             count={colors.filter(c => c === PinColor.YELLOW)?.length}
             color="#cc8e35"
             className="second-step" />
         </>
         :
-        [...Array(2)].map((e, i) =>
+        ["first-step", "second-step"].map((c, i) =>
           <Indicator
             key={i}
-            active={value.activeBoardIndex === rowIndex + 1}
+            active={active}
             color="#84817a"
             opacity={0.2}
-            className="first-step" />
+            className={c} />
         )
       }
     </Stack>
