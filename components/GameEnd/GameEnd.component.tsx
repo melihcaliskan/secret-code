@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Button, Heading, Box } from '@chakra-ui/react'
+import { Button, Heading, Box, Text } from '@chakra-ui/react'
 import { GameContext, INITIAL_STATE } from 'store/Game.context';
 import Counter from 'components/Counter/Counter.component';
 import ShareButtons from 'components/ShareButtons/ShareButtons.component';
@@ -24,6 +24,17 @@ export function GameEnd(props) {
     });
   }, []);
 
+  function showBoard() {
+    setValue({
+      isFlipped: true
+    });
+    analytics.event({
+      action: Event.SHOW_BOARD,
+      params: {
+        ...value
+      }
+    });
+  }
 
   function restartGame() {
     setValue(INITIAL_STATE);
@@ -60,6 +71,16 @@ export function GameEnd(props) {
           height={14}
           onClick={restartGame}>
           Restart Game
+        </Button>
+
+        <Button
+          mt={12}
+          isFullWidth
+          onClick={showBoard}
+          variant="outline">
+          <Text color="white">
+            Show Board
+          </Text>
         </Button>
       </Box>
     </Box>

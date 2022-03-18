@@ -31,7 +31,7 @@ export function Header(props: IHeader.IHeaderProps) {
       </div>
       <div className={boardClasses}>
         <Box w="72px" />
-        {board?.map((color, idx) =>
+        {isFlipped && board?.map((color, idx) =>
           <Pin
             key={idx}
             color={color}
