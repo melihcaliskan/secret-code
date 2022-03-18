@@ -7,5 +7,16 @@ export const SITE_DESC = "Secret Code is a fun, interactive puzzle game that cha
 export const BOARD_SIZE = 4;
 export const BOARD_ROWS = 8;
 
-export const SUCCESS_MESSAGE = (count: number, playTime: number) => `You found the code in ${count} attempt${count > 1 ? `s`: ``} and ${playTime} seconds`;
+export const SUCCESS_MESSAGE = (count: number, playTime: number) => `You found the code in ${count} attempt${count > 1 ? `s` : ``} and ${playTime} seconds`;
 export const FAIL_MESSAGE = (count: number, playTime: number) => `You couldn't find the code in ${count} attempt${count > 1 ? `s` : ``} and ${playTime} seconds`;
+
+export const TOUR_STEPS = [
+  {
+    selector: '.first-step',
+    content: 'Number of pins with correct color and location.',
+  },
+  {
+    selector: '.second-step',
+    content: 'Number of pins with correct color but wrong location.',
+  },
+]

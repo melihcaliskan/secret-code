@@ -83,10 +83,6 @@ export function Home(props: IHome.IHomeProps) {
       const nextBoard = activeBoardIndex + 1;
 
       if (BOARD_ROWS === nextBoard) {
-        setValue({
-          isFlipped: true
-        });
-
         // Wait for flip animation.
         setTimeout(() => {
           setValue({
@@ -163,12 +159,5 @@ export async function getServerSideProps() {
     },
   }
 }
-
-
-{/* <Button onClick={() => setValue({ isFlipped: true })}>
-        Flip
-      </Button> */}
-
-{/* {JSON.stringify(value)} */ }
 
 export default Home;
