@@ -14,11 +14,15 @@ import { getUUID, isDev } from '@/utility/helpers';
 import styles from "styles/Board.module.scss";
 import useStorage from '@/utility/useStorage';
 import { useTour } from '@reactour/tour';
+import { TourContext, TOUR_INITIAL_STATE } from '@/store/Tour.context';
+import { Steps } from 'intro.js-react';
 
 export function Home(props: IHome.IHomeProps) {
   const { getItem, setItem } = useStorage();
   const { setIsOpen } = useTour()
   const [value, setValue]: any = useContext(GameContext);
+  const [tour, setTour] = useContext(TourContext);
+
   const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin } = value;
 
   useEffect(() => {
@@ -154,6 +158,7 @@ export function Home(props: IHome.IHomeProps) {
 
       <Input onClick={onInput} />
       {isDev() && <p>{JSON.stringify(value)}</p>}
+      {/* {isDev() && JSON.stringify(tour)} */}
     </Container>
   )
 }

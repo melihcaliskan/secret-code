@@ -129,3 +129,11 @@
     height: 220px;
   }
 }
+
+.emoji {
+  display: inline-block;
+  width: auto;
+  min-width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}

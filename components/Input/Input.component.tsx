@@ -5,20 +5,16 @@ import { PinColor } from "@/enums/PinColor.enum";
 import { enumToArray } from "@/utility/helpers";
 import { useContext } from 'react';
 import { GameContext } from '@/store/Game.context';
+import Twemoji from '@/components/Twemoji/Twemoji.component';
 
 export function Input(props) {
   const [value, setValue]: any = useContext(GameContext);
-  const { isStarted, isOver, isSuccess } = value;
+  const { isStarted, isOver, isSuccess, selectedPin } = value;
   const { onClick } = props;
   const hideCover = isStarted && (isStarted && !isSuccess) && (isStarted && !isOver);
 
-  return (
-    <VStack
-      className={styles.input}>
-
-      <Box
-        className={`${styles.inputCover} ${hideCover ? styles.coverHidden : ""}`} />
-
+  function renderInputs() {
+    return (
       <Box>
         <Text
           fontSize="2xl"
@@ -36,7 +32,29 @@ export function Input(props) {
           )}
         </HStack>
       </Box>
-    </VStack>
+    )
+  }
+
+  function renderTrash() {
+    return (
+      <Box mt={6}>
+        <Twemoji
+          emoji="🗑"
+          size={36} />
+      </Box>
+    )
+  }
+
+  return (
+    <Box
+      className={styles.input}>
+
+      <Box
+        className={`${styles.inputCover} ${hideCover ? styles.coverHidden : ""}`} />
+
+      {renderInputs()}
+      {selectedPin && renderTrash()}
+    </Box>
   )
 }
 

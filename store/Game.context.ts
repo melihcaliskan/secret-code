@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export const INITIAL_STATE = {
-  isStarted: false,
+  isStarted: true,
   isSuccess: false,
   isOver: false,
   isFlipped: false,

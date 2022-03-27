@@ -1,14 +1,15 @@
 // @ts-nocheck
+import 'intro.js/introjs.css';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
-import { TourProvider } from '@reactour/tour';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { GameProvider } from '@/providers/Game.Provider';
-import { INITIAL_STATE } from '@/store/Game.context';
+import { INITIAL_STATE as GAME_INITIAL_STATE } from '@/store/Game.context';
 import { TOUR_STEPS } from '@/utility/constants';
+import { TourProvider } from '@reactour/tour';
 
 function SecretCode({ Component, pageProps }: AppProps) {
-  const [gameContext, setGameContext] = useState(INITIAL_STATE);
+  const [gameContext, setGameContext] = useState(GAME_INITIAL_STATE);
 
   useEffect(() => {
     window.OneSignal = window.OneSignal || [];
@@ -56,13 +57,21 @@ function SecretCode({ Component, pageProps }: AppProps) {
     }
   });
 
+  const tourStyles = {
+  }
+
   return (
     <ChakraProvider theme={theme}>
       <GameProvider value={gameContext} setValue={updateContext}>
-        <TourProvider steps={TOUR_STEPS}>
+        <TourProvider
+          showBadge={false}
+          styles={tourStyles}
+          steps={TOUR_STEPS}>
           <Component {...pageProps} />
         </TourProvider>
       </GameProvider>
+      {/* <TourProvider tour={tourContext} setTour={setTourContext}> */}
+      {/* <TourProvider steps={TOUR_STEPS}> */}
     </ChakraProvider>
   )
 }
