@@ -9,12 +9,16 @@ import { Box } from "@chakra-ui/react";
 
 export function Row(props) {
   const [value, setValue] = useContext(GameContext);
-  const { board, selectedPin } = value;
+  const { board, selectedPin, inputs } = value;
   const { active, slicedInputs, rowIndex } = props;
 
-  function handleClick(idx) {
+  function handleClick(idx: number) {
     if (active) {
+      let tempInputs = [...inputs];
+      tempInputs[BOARD_SIZE * rowIndex + idx] = undefined;
+
       setValue({
+        inputs: tempInputs,
         selectedPin: {
           row: rowIndex,
           column: idx

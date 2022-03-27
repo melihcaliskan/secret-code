@@ -56,15 +56,12 @@ export function Home(props: IHome.IHomeProps) {
   function updateInput(color: string) {
     // Update existing column.
     let tempInputs = [...inputs];
-    let selected = tempInputs[BOARD_SIZE * selectedPin.row + selectedPin.column];
-
-    if (!selected) {
-      tempInputs[BOARD_SIZE * selectedPin.row + selectedPin.column] = color;
-      setValue({
-        inputs: tempInputs,
-        selectedPin: undefined
-      });
-    }
+    tempInputs[BOARD_SIZE * selectedPin.row + selectedPin.column] = color;
+    
+    setValue({
+      inputs: tempInputs,
+      selectedPin: undefined
+    });
   }
 
   function showTour() {
