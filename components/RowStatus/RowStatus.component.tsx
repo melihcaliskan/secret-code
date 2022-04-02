@@ -6,11 +6,9 @@ import { PinColor } from '@/enums/PinColor.enum';
 import { GameContext } from '@/store/Game.context';
 import { BOARD_SIZE } from '@/utility/constants';
 import { getRowColors } from '@/utility/helpers';
-import { useTour } from '@reactour/tour';
 
 export function Indicator(props) {
   const { active, className, count, color, opacity } = props;
-  const { setIsOpen } = useTour();
 
   return (
     <Box
@@ -23,8 +21,7 @@ export function Indicator(props) {
       opacity={opacity || 1}
       borderRadius={3}
       backgroundColor={color}
-      className={active ? className : ""}
-      onClick={() => setIsOpen(true)}>
+      className={active ? className : ""}>
       <Text color="white">
         {count}
       </Text>

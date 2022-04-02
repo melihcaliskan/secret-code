@@ -13,13 +13,11 @@ import { GameContext } from '@/store/Game.context';
 import { getUUID, isDev } from '@/utility/helpers';
 import styles from "styles/Board.module.scss";
 import useStorage from '@/utility/useStorage';
-import { useTour } from '@reactour/tour';
 
 export function Home(props: IHome.IHomeProps) {
   const { getItem, setItem } = useStorage();
-  const { setIsOpen } = useTour()
   const [value, setValue]: any = useContext(GameContext);
-  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin } = value;
+  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin, popoverIndex } = value;
 
   useEffect(() => {
     // Set day and board to context.
@@ -40,7 +38,11 @@ export function Home(props: IHome.IHomeProps) {
     // First input, record date.
     setValue({
       startTime: new Date().getTime()
-    })
+    });
+
+    // setValue({
+    //   popoverIndex: popoverIndex + 1
+    // });
   }
 
   function setInput(color: string) {
@@ -71,7 +73,7 @@ export function Home(props: IHome.IHomeProps) {
     const isTourCompleted = getItem("isTourCompleted");
 
     if (!isTourCompleted) {
-      setIsOpen(true);
+      //setIsOpen(true);
       setItem("isTourCompleted", JSON.stringify(true));
     }
   }

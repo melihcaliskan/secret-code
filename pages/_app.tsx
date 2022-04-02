@@ -1,11 +1,9 @@
 // @ts-nocheck
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
-import { TourProvider } from '@reactour/tour';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { GameProvider } from '@/providers/Game.Provider';
 import { INITIAL_STATE } from '@/store/Game.context';
-import { TOUR_STEPS } from '@/utility/constants';
 
 function SecretCode({ Component, pageProps }: AppProps) {
   const [gameContext, setGameContext] = useState(INITIAL_STATE);
@@ -59,9 +57,7 @@ function SecretCode({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <GameProvider value={gameContext} setValue={updateContext}>
-        <TourProvider steps={TOUR_STEPS}>
-          <Component {...pageProps} />
-        </TourProvider>
+        <Component {...pageProps} />
       </GameProvider>
     </ChakraProvider>
   )
