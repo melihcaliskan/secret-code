@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 import { Box, Stack, Text } from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons'
 import { PinColor } from '@/enums/PinColor.enum';
 import { GameContext } from '@/store/Game.context';
 import { BOARD_SIZE, POPOVER_TEXTS } from '@/utility/constants';
@@ -33,7 +34,7 @@ export function Indicator(props) {
 export function RowStatus(props: any) {
   const { slicedInputs, rowIndex } = props;
   const [value, setValue]: any = useContext(GameContext);
-  const { popoverIndex } = value;
+  const { inputs, popoverIndex } = value;
   const [colors, setColors] = useState([]);
   const active = value.activeBoardIndex === 0 || value.activeBoardIndex === rowIndex + 1;
 
@@ -91,7 +92,38 @@ export function RowStatus(props: any) {
     )
   }
 
+  // TODO
+  function clearCurrentRow() {
+    const tempInputs = inputs.slice(0, -(inputs.length % BOARD_SIZE));
+    setValue({
+      inputs: tempInputs,
+    });
+  }
+
   function renderEmptyRow() {
+    // If one or more input exists in row.
+    const isCurrent = rowIndex == value.activeBoardIndex;
+    const hasInput = inputs[rowIndex * BOARD_SIZE];
+    if (isCurrent && hasInput) {
+      return (
+        <Box
+          onClick={clearCurrentRow}
+          w="68px"
+          h="28px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          cursor="pointer"
+          borderRadius={3}
+          backgroundColor={"#394a74"}>
+          <DeleteIcon
+            w={4}
+            h={4}
+            color="red.400" />
+        </Box>
+      )
+    }
+
     return (
       ["first-step", "second-step"].map((c, i) =>
         <Indicator
