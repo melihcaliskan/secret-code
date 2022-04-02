@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
   isFlipped: false,
   inputs: [],
   rowColors: [],
+  inputIndex: 0,
   activeBoardIndex: 0,
   startTime: 0,
   selectedPin: undefined,

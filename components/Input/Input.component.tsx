@@ -6,6 +6,7 @@ import { PinColor } from "@/enums/PinColor.enum";
 import { enumToArray } from "@/utility/helpers";
 import { GameContext } from '@/store/Game.context';
 import { Popover } from '@/components/Popover/Popover.component';
+import { POPOVER_TEXTS } from '@/utility/constants';
 
 export function Input(props) {
   const [value, setValue]: any = useContext(GameContext);
@@ -44,7 +45,7 @@ export function Input(props) {
 
   return (
     <Popover
-      text="Try to find the code by choosing from the colors below."
+      text={POPOVER_TEXTS[1]}
       isOpen={popoverIndex === 1}>
       {content()}
     </Popover>

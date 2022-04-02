@@ -4,8 +4,9 @@ import { useContext, useEffect, useState } from 'react';
 import { Box, Stack, Text } from '@chakra-ui/react'
 import { PinColor } from '@/enums/PinColor.enum';
 import { GameContext } from '@/store/Game.context';
-import { BOARD_SIZE } from '@/utility/constants';
+import { BOARD_SIZE, POPOVER_TEXTS } from '@/utility/constants';
 import { getRowColors } from '@/utility/helpers';
+import { Popover } from '../Popover/Popover.component';
 
 export function Indicator(props) {
   const { active, className, count, color, opacity } = props;
@@ -32,8 +33,11 @@ export function Indicator(props) {
 export function RowStatus(props: any) {
   const { slicedInputs, rowIndex } = props;
   const [value, setValue]: any = useContext(GameContext);
+  const { popoverIndex } = value;
   const [colors, setColors] = useState([]);
+  const active = value.activeBoardIndex === 0 || value.activeBoardIndex === rowIndex + 1;
 
+  const text = popoverIndex == 2 ? POPOVER_TEXTS[2] : POPOVER_TEXTS[3];
   function getColors() {
     return getRowColors(value.board, slicedInputs);
   }
@@ -57,32 +61,74 @@ export function RowStatus(props: any) {
     }
   }, [slicedInputs]);
 
-  const active = value.activeBoardIndex === 0 || value.activeBoardIndex === rowIndex + 1;
+  function greenIndicator() {
+    return (
+      <Stack>
+        <Indicator
+          onClick={() => setValue({
+            popoverIndex: 2
+          })}
+          active={active}
+          count={colors.filter(c => c === PinColor.GREEN)?.length}
+          color="#218c74"
+          className="first-step" />
+      </Stack>
+    )
+  }
+
+  function yellowIndicator() {
+    return (
+      <Stack>
+        <Indicator
+          onClick={() => setValue({
+            popoverIndex: 3
+          })}
+          active={active}
+          count={colors.filter(c => c === PinColor.YELLOW)?.length}
+          color="#cc8e35"
+          className="second-step" />
+      </Stack>
+    )
+  }
+
+  function renderEmptyRow() {
+    return (
+      ["first-step", "second-step"].map((c, i) =>
+        <Indicator
+          key={i}
+          active={active}
+          color="#84817a"
+          opacity={0.2}
+          className={c} />
+      )
+    )
+  }
+
   return (
     <Stack w="72px" direction="row" alignItems="center" spacing="3">
       {value.activeBoardIndex > rowIndex ?
-        <>
-          <Indicator
-            active={active}
-            count={colors.filter(c => c === PinColor.GREEN)?.length}
-            color="#218c74"
-            className="first-step" />
-
-          <Indicator
-            active={active}
-            count={colors.filter(c => c === PinColor.YELLOW)?.length}
-            color="#cc8e35"
-            className="second-step" />
-        </>
+        value.activeBoardIndex === 1 ?
+          <>
+            <Popover
+              placement="bottom"
+              text={text}
+              isOpen={popoverIndex == 2}>
+              {yellowIndicator()}
+            </Popover>
+            <Popover
+              placement="bottom"
+              text={text}
+              isOpen={popoverIndex == 3}>
+              {greenIndicator()}
+            </Popover>
+          </>
+          :
+          <>
+            {greenIndicator()}
+            {yellowIndicator()}
+          </>
         :
-        ["first-step", "second-step"].map((c, i) =>
-          <Indicator
-            key={i}
-            active={active}
-            color="#84817a"
-            opacity={0.2}
-            className={c} />
-        )
+        renderEmptyRow()
       }
     </Stack>
   )

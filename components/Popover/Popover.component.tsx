@@ -21,7 +21,7 @@ export function Popover(props: any) {
 
   useEffect(() => {
     setIsOpen(isOpen);
-  }, [props.isOpen])
+  }, [props.isOpen]);
 
   function handleClose() {
     setIsOpen(false);
@@ -34,8 +34,8 @@ export function Popover(props: any) {
     <PopoverComponent
       isOpen={isPopoverOpen}
       onClose={handleClose}
-      placement={placement || "top"}
-      closeOnBlur={true}>
+      closeOnBlur={true}
+      placement={placement || "top"}>
       <PopoverTrigger>
         {children}
       </PopoverTrigger>
