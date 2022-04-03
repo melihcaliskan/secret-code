@@ -13,13 +13,11 @@ import { GameContext } from '@/store/Game.context';
 import { getUUID, isDev } from '@/utility/helpers';
 import styles from "styles/Board.module.scss";
 import useStorage from '@/utility/useStorage';
-import { useTour } from '@reactour/tour';
 
 export function Home(props: IHome.IHomeProps) {
   const { getItem, setItem } = useStorage();
-  const { setIsOpen } = useTour()
   const [value, setValue]: any = useContext(GameContext);
-  const { activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin } = value;
+  const { inputIndex, activeBoardIndex, inputs, isStarted, isSuccess, isOver, selectedPin, popoverIndex } = value;
 
   useEffect(() => {
     // Set day and board to context.
@@ -40,12 +38,17 @@ export function Home(props: IHome.IHomeProps) {
     // First input, record date.
     setValue({
       startTime: new Date().getTime()
-    })
+    });
+
+    // setValue({
+    //   popoverIndex: popoverIndex + 1
+    // });
   }
 
   function setInput(color: string) {
     // Add new color to inputs.
     setValue({
+      inputIndex: inputIndex + 1,
       inputs: [
         ...value.inputs,
         color
@@ -67,15 +70,6 @@ export function Home(props: IHome.IHomeProps) {
     }
   }
 
-  function showTour() {
-    const isTourCompleted = getItem("isTourCompleted");
-
-    if (!isTourCompleted) {
-      setIsOpen(true);
-      setItem("isTourCompleted", JSON.stringify(true));
-    }
-  }
-
   function onInput(color: string) {
     if (inputs.length === 0) {
       handleFirstInput();
@@ -92,9 +86,6 @@ export function Home(props: IHome.IHomeProps) {
     if (inputs.length > 0 && inputs.length % BOARD_SIZE === BOARD_SIZE - 1) {
       const nextBoard = activeBoardIndex + 1;
 
-      if (nextBoard === 1) {
-        showTour();
-      }
 
       if (BOARD_ROWS === nextBoard) {
         // Wait for flip animation.
