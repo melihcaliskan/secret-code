@@ -145,13 +145,13 @@ export function RowStatus(props: any) {
               placement="bottom"
               text={text}
               isOpen={popoverIndex == 2}>
-              {yellowIndicator()}
+              {greenIndicator()}
             </Popover>
             <Popover
               placement="bottom"
               text={text}
               isOpen={popoverIndex == 3}>
-              {greenIndicator()}
+              {yellowIndicator()}
             </Popover>
           </>
           :
